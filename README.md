@@ -8,27 +8,40 @@ Keyfleur creates keys that are elegant, readable, and never boring.
 
 ## 🔧 Installation
 
+### From npm (once published)
 ```bash
-pip install .
-````
+npm install -g keyfleur-ts
+```
+
+### From Git Repository (for development or pre-publishing)
+```bash
+npm install -g <your-git-repo-url> 
+# Example: npm install -g https://github.com/Xopper/keyfleur.git 
+# (Replace with the actual URL if different)
+```
+After installation, you can run `keyfleur-ts --help` to verify.
 
 ---
 
 ## 🚀 CLI Usage
 
 ```bash
-keyfleur --theme=forest --mode=haiku --count=3
+keyfleur-ts --theme=forest --mode=haiku --count=3
+```
+Or using aliases:
+```bash
+keyfleur-ts -t forest -m haiku -c 3
 ```
 
 ### Options
 
-| Option    | Description                                 |
-| --------- | ------------------------------------------- |
-| `--theme` | The semantic dictionary to draw words from. |
-|           | *(haiku, forest, mythic, sunny, etc.)*      |
-| `--mode`  | The structural format of the key.           |
-|           | *(haiku, sigil, quartz, mantra, etc.)*      |
-| `--count` | Number of keys to generate. Default is `1`. |
+| Option    | Alias | Description                                 |
+| --------- | ----- | ------------------------------------------- |
+| `--theme` | `-t`  | The semantic dictionary to draw words from. |
+|           |       | *(haiku, forest, mythic, sunny, etc.)*      |
+| `--mode`  | `-m`  | The structural format of the key.           |
+|           |       | *(haiku, sigil, quartz, mantra, etc.)*      |
+| `--count` | `-c`  | Number of keys to generate. Default is `1`. |
 
 ---
 
@@ -71,13 +84,14 @@ Themes determine the pool of vocabulary used:
 ## 🧪 Example
 
 ```bash
-keyfleur --theme=celestial --mode=haiku
+keyfleur-ts --theme=celestial --mode=haiku
 ```
 
 Might output:
 
 ```
-Nova-DriftingOrbit-Moonlight
+Nova-DriftingOrbit-Moonlight 
+# (Output will vary due to randomization and potential syllable count differences from Python version)
 ```
 
 ---
@@ -87,6 +101,69 @@ Nova-DriftingOrbit-Moonlight
 * Generate poetic API keys or user-facing identifiers
 * Use in games, lore systems, or design prototypes
 * Inject elegance into otherwise boring IDs
+
+---
+
+## 🛠️ Development / Building from Source
+
+### Prerequisites
+* Node.js (v18 or higher recommended)
+* npm (usually comes with Node.js)
+
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone <your-git-repo-url> 
+   # Example: git clone https://github.com/Xopper/keyfleur.git
+   cd keyfleur 
+   # (Or the directory name if different)
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Building
+To compile the TypeScript code to JavaScript (output to `dist` directory):
+```bash
+npm run build
+```
+
+### Running Tests
+To run the unit and integration tests:
+```bash
+npm run test
+```
+
+---
+
+## 📚 Library Usage
+
+You can use `keyfleur-ts` as a library in your TypeScript or JavaScript projects.
+
+```typescript
+// Assuming you've installed it: npm install keyfleur-ts
+// Or for local development, you might need to adjust the import path
+// e.g., import { poetic_key, THEMES, MODES } from './dist'; 
+// after running npm run build
+
+import { poetic_key, THEMES, MODES } from 'keyfleur-ts'; 
+
+const key = poetic_key('mythic', 'rune');
+console.log(key);
+
+// You can also access the available themes and modes:
+console.log('Available Themes:', Object.keys(THEMES));
+console.log('Available Modes:', Object.keys(MODES));
+
+// Example of generating a key with default parameters
+const defaultKey = poetic_key(); // Uses 'haiku' mode and 'haiku' theme
+console.log('Default Key:', defaultKey);
+
+// Example of mirrora mode (which doesn't require a theme)
+const mirrorKey = poetic_key('mirrora');
+console.log('Mirrora Key:', mirrorKey);
+```
 
 ---
 
